@@ -32,13 +32,22 @@
                 </tr>
                 @foreach ($companies as $Company)
                     <tr>
-                        <td>{{ $company->id }}</td>
-                        <td>{{ $company->name }}</td>
-                        <td>{{ $company->email }}</td>
-                        <td>{{ $company->address }}</td>
+                        <td>{{ $Company->id }}</td>
+                        <td>{{ $Company->name }}</td>
+                        <td>{{ $Company->email }}</td>
+                        <td>{{ $Company->address }}</td>
+                        <td>
+                            <form action="{{ route('companies.destroy', $Company->id) }}" method="POST">
+                                <a href="{{ route('companies.edit', $Company->id) }}" class="btn btn-warning">Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </table>
+            {!! $companies->links('pagination::bootstrap-5') !!}
         </div>
     </div>
     
